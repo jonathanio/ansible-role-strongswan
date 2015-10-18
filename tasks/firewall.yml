@@ -1,0 +1,29 @@
+---
+
+# TODO: Provite ways to configure via firewalld, ufw, or leave alone.
+
+- name: "Configure firewall rules to allow strongSwan traffic"
+  ufw:
+    direction=in
+    src="{{ item.0.right.address }}"
+    to="{{ item.0.left.address }}"
+    proto="{{ item.1.proto }}"
+    port="{{ item.1.port | default('') }}"
+    rule=allow
+  with_nested:
+    - strongswan_conn
+    - [ {"proto": udp, "port": 500}, {"proto": esp}, {"proto": ah} ]
+
+# NOTE: This is a temporary override until the IPSec policy roles are in place,
+#       and required a patched ufw.py script to allow configuration of GRE
+#       protocols.
+- name: "Configure firewall rules to allow GRE traffic for configured hosts"
+  ufw:
+    direction=in
+    src="{{ item.right.address }}"
+    to="{{ item.left.address }}"
+    proto=gre
+    rule=allow
+  when: item.left.protoport is defined and item.left.protoport == 47
+  with_items:
+    strongswan_conn

@@ -1,0 +1,20 @@
+# {{ ansible_managed }}
+
+config setup
+{% if strongswan_cachecrls is defined %}
+  cachecrls={{ strongswan_cachecrls }}
+{% endif %}
+{% if strongswan_charondebug is defined %}
+  charondebug={{ strongswan_charondebug }}
+{% endif %}
+{% if strongswan_charonstart is defined %}
+  charonstart={{ strongswan_charonstart }}
+{% endif %}
+{% if strongswan_strictcrlpolicy is defined %}
+  strictcrlpolicy={{ strongswan_strictcrlpolicy }}
+{% endif %}
+{% if strongswan_uniqueids is defined %}
+  uniqueids={{ strongswan_uniqueids }}
+{% endif %}
+
+include /etc/ipsec.conf.d/*.conf

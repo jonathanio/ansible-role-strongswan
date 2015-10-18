@@ -1,0 +1,31 @@
+---
+# defaults file for strongswan
+
+strongswan_packages:
+  - strongswan
+
+strongswan_conn_default:
+  auto: add
+  type: tunnel
+  authby: psk
+  keyexchange: ike
+  ikelifetime: 3h
+  lifetime: 60m
+  margintime: 15m
+  keyingtries: 3
+  dpdaction: restart
+  dpddelay: 30
+
+strongswan_conn: []
+# - name: connection_name
+#   conn:
+#     # connection options go here, e.g.
+#     ike: aes256gcm16-modp2048!
+#     esp: aes256gcm16-modp2048!
+#   left:
+#     address: local_address
+#     # further left-hand options here
+#   right:
+#     address: remote_address
+#     # further right-hand options here
+#   secret: abcde...z

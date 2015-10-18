@@ -1,0 +1,12 @@
+# {{ ansible_managed }}
+
+conn %default
+{% for option in [
+       'auto', 'closeaction', 'type', 'authby', 'ike', 'aggressive',
+       'fragmentation', 'ah', 'esp', 'compress', 'ikelifetime',
+       'ikelife', 'keyexhange', 'keytime', 'lifetime', 'margintime',
+       'rekeymargin', 'rekeyfuzz', 'keyingtries', 'dpdaction', 'dpddelay' ] %}
+{%   if strongswan_conn_default[option] is defined %}
+  {{ option }}={{ strongswan_conn_default[option] }}
+{%   endif %}
+{% endfor %}

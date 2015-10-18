@@ -1,0 +1,7 @@
+---
+
+- name: "Enable/Start strongSwan service"
+  service:
+    name=strongswan
+    enabled=yes
+    state=started

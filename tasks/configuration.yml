@@ -1,0 +1,37 @@
+---
+
+- name: "Ensure config and secrets fragment directories are present"
+  file:
+    path="/etc/{{ item }}"
+    state=directory
+    owner=root group=root mode=0750
+  with_items:
+    - ipsec.conf.d
+    - ipsec.secrets.d
+
+- name: "Configure base strongSwan settings"
+  template:
+    src="{{ item }}.j2"
+    dest="/etc/{{ item }}"
+    owner=root group=root mode=0640
+  notify: reload strongswan
+  with_items:
+    - ipsec.conf
+    - ipsec.secrets
+
+- name: "Configure strongSwan default settings"
+  template:
+    src=defaults.conf.j2
+    dest="/etc/ipsec.conf.d/00-defaults.conf"
+    owner=root group=root mode=0640
+  notify: reload strongswan
+
+- name: "Configure strongSwan per-connection settings"
+  template:
+    src="connection.{{ item.1 }}.j2"
+    dest="/etc/ipsec.{{ item.1 }}.d/{{ item.0.priority | default(99) }}-{{ item.0.name }}.{{ item.1 }}"
+    owner=root group=root mode=0640
+  with_nested:
+    - strongswan_conn
+    - [ 'conf', 'secrets' ]
+  notify: reload strongswan

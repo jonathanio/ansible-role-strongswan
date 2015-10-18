@@ -1,0 +1,10 @@
+---
+
+# TODO: This will need work to possible make this optional, or find a way to
+#       manage it through an AUR possibly?
+
+# - name: "Install/Upgrade strongSwan packages"
+#   pacman:
+#     name="{{ item }}"
+#     state=latest
+#   with_items: strongswan_packages
