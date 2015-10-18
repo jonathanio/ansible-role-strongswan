@@ -55,7 +55,7 @@ Connection information to be installed into strongSwan.
 
     - hosts: ipsec_server
       roles:
-         - { role: jonathanio.strongswap, tags: ['ipsec'] }
+         - { role: jonathanio.strongswan, tags: ['ipsec'] }
 
     ---
     strongswan_hosts:
