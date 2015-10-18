@@ -79,7 +79,7 @@ Connection information to be installed into strongSwan.
 
 ## License
 
-GPLv3
+GPLv2
 
 ## Author Information
 
