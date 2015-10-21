@@ -9,7 +9,7 @@
     - ipsec.conf.d
     - ipsec.secrets.d
 
-- name: "Configure base strongSwan settings"
+- name: "Configure strongSwan core settings"
   template:
     src="{{ item }}.j2"
     dest="/etc/{{ item }}"
@@ -19,7 +19,7 @@
     - ipsec.conf
     - ipsec.secrets
 
-- name: "Configure strongSwan default settings"
+- name: "Configure strongSwan connection default settings"
   template:
     src=defaults.conf.j2
     dest="/etc/ipsec.conf.d/00-defaults.conf"

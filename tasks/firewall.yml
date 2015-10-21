@@ -15,7 +15,7 @@
     - [ {"proto": udp, "port": 500}, {"proto": esp}, {"proto": ah} ]
 
 # NOTE: This is a temporary override until the IPSec policy roles are in place,
-#       and required a patched ufw.py script to allow configuration of GRE
+#       and requires a patched ufw.py script to allow configuration of GRE
 #       protocols.
 - name: "Configure firewall rules to allow GRE traffic for configured hosts"
   ufw:
