@@ -14,7 +14,7 @@
     src="{{ item }}.j2"
     dest="/etc/{{ item }}"
     owner=root group=root mode=0640
-  notify: reload strongswan
+  notify: restart strongswan
   with_items:
     - ipsec.conf
     - ipsec.secrets
@@ -24,7 +24,7 @@
     src=defaults.conf.j2
     dest="/etc/ipsec.conf.d/00-defaults.conf"
     owner=root group=root mode=0640
-  notify: reload strongswan
+  notify: restart strongswan
 
 - name: "Configure strongSwan per-connection settings"
   template:
@@ -34,4 +34,4 @@
   with_nested:
     - strongswan_conn
     - [ 'conf', 'secrets' ]
-  notify: reload strongswan
+  notify: restart strongswan

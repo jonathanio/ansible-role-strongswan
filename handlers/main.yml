@@ -5,8 +5,3 @@
   service:
     name=strongswan
     state=restarted
-
-- name: reload strongswan
-  service:
-    name=strongswan
-    state=reloaded
