@@ -35,3 +35,11 @@
     - strongswan_conn
     - [ 'conf', 'secrets' ]
   notify: restart strongswan
+
+- name: "Tag Dataloop agent for strongswan"
+  command: /usr/bin/dataloop-agent -a {{ dataloop_api_key }} --add-tags strongswan
+  when:
+    - dataloop_enabled is defined
+    - dataloop_enabled == True
+  tags:
+    - dataloop
