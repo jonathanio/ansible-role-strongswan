@@ -11,7 +11,7 @@
     port="{{ item.1.port | default('') }}"
     rule=allow
   with_nested:
-    - strongswan_conn
+    - "{{ strongswan_conn }}"
     - [ {"proto": udp, "port": 500}, {"proto": esp}, {"proto": ah} ]
 
 # NOTE: This is a temporary override until the IPSec policy roles are in place,
@@ -26,4 +26,6 @@
     rule=allow
   when: item.left.protoport is defined and item.left.protoport == 47
   with_items:
-    strongswan_conn
+    "{{ strongswan_conn }}"
+  tags:
+    - firewall

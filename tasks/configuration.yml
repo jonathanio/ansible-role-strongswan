@@ -32,6 +32,6 @@
     dest="/etc/ipsec.{{ item.1 }}.d/{{ item.0.priority | default(99) }}-{{ item.0.name }}.{{ item.1 }}"
     owner=root group=root mode=0640
   with_nested:
-    - strongswan_conn
+    - "{{ strongswan_conn }}"
     - [ 'conf', 'secrets' ]
   notify: restart strongswan
