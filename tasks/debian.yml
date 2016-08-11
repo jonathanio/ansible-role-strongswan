@@ -3,7 +3,7 @@
 
 - include_vars: debian.yml
 
-- name: Install strongswan
+- name: Install strongSwan
   apt:
     name: "{{ item }}"
     state: present

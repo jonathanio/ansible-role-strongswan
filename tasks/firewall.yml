@@ -1,7 +1,7 @@
 ---
 # firewall-specific tasks for strongswan
 
-- name: Open firewalld protocols for StrongSwan
+- name: Open firewalld protocols for strongSwan
   firewalld:
     rich_rule: "rule protocol value={{ item }} accept"
     permanent: true
@@ -13,7 +13,7 @@
   when:
     (use_firewalld is defined and use_firewalld)
 
-- name: Open firewalld ports for StrongSwan
+- name: Open firewalld ports for strongSwan
   firewalld:
     port: "500/udp"
     permanent: true
