@@ -7,20 +7,23 @@
     permanent: true
     state: enabled
     immediate: yes
+  when:
+    (use_firewalld is defined and use_firewalld)
   with_items:
     - ah
     - esp
-  when:
-    (use_firewalld is defined and use_firewalld)
 
 - name: Open firewalld ports for strongSwan
   firewalld:
-    port: "500/udp"
+    port: "{{ item }}"
     permanent: true
     state: enabled
     immediate: yes
   when:
     (use_firewalld is defined and use_firewalld)
+  with_items:
+    - 500/udp
+    - 4500/udp
 
 # - name: "Configure firewall rules to allow strongSwan traffic"
 #   ufw:
