@@ -1,7 +1,8 @@
 ---
+# service-specific task file for strongswan
 
-- name: "Enable/Start strongSwan service"
+- name: Enable/Start strongSwan
   service:
-    name=strongswan
-    enabled=yes
-    state=started
+    name: strongswan
+    state: started
+    enabled: yes
