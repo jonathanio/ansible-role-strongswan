@@ -1,37 +1,49 @@
 ---
+# config-specific task file for strongswan
 
-- name: "Ensure config and secrets fragment directories are present"
+- name: Create config and secrets fragment directories
   file:
-    path="/etc/{{ item }}"
-    state=directory
-    owner=root group=root mode=0750
+    path: "{{ strongswan_config_base }}/{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0750
   with_items:
     - ipsec.conf.d
     - ipsec.secrets.d
 
-- name: "Configure strongSwan core settings"
+- name: Configure strongSwan core settings
   template:
-    src="{{ item }}.j2"
-    dest="/etc/{{ item }}"
-    owner=root group=root mode=0640
-  notify: restart strongswan
+    src: "{{ item }}.j2"
+    dest: "/{{ strongswan_config_base }}/{{ item }}"
+    owner: root
+    group: root
+    mode: 0640
+  notify:
+    restart strongswan
   with_items:
     - ipsec.conf
     - ipsec.secrets
 
-- name: "Configure strongSwan connection default settings"
+- name: Configure strongSwan default connection settings
   template:
-    src=defaults.conf.j2
-    dest="/etc/ipsec.conf.d/00-defaults.conf"
-    owner=root group=root mode=0640
-  notify: restart strongswan
+    src: defaults.conf.j2
+    dest: "/{{ strongswan_config_base }}/ipsec.conf.d/00-defaults.conf"
+    owner: root
+    group: root
+    mode: 0640
+  notify:
+    restart strongswan
 
-- name: "Configure strongSwan per-connection settings"
+- name: Configure strongSwan per-connection settings
   template:
-    src="connection.{{ item.1 }}.j2"
-    dest="/etc/ipsec.{{ item.1 }}.d/{{ item.0.priority | default(99) }}-{{ item.0.name }}.{{ item.1 }}"
-    owner=root group=root mode=0640
+    src: "connection.{{ item.1 }}.j2"
+    dest: "/{{ strongswan_config_base }}/ipsec.{{ item.1 }}.d/{{ item.0.priority | default(99) }}-{{ item.0.name }}.{{ item.1 }}"
+    owner: root
+    group: root
+    mode: 0640
   with_nested:
     - "{{ strongswan_conn }}"
     - [ 'conf', 'secrets' ]
-  notify: restart strongswan
+  notify:
+    restart strongswan
