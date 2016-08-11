@@ -1,2 +1,5 @@
 ---
 # vars file for strongswan
+
+strongswan_packages:
+  - strongswan

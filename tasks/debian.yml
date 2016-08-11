@@ -1,3 +1,11 @@
 ---
+# Debian-specific task file for strongswan
 
-# TODO: Needs tasks...
+- include_vars: debian.yml
+
+- name: Install strongswan
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    "{{ strongswan_packages }}"

@@ -1,10 +1,11 @@
 ---
+# ArchLinux-specific task file for strongswan
 
-# TODO: This will need work to possible make this optional, or find a way to
-#       manage it through an AUR possibly?
+- include_vars: arch.yml
 
-# - name: "Install/Upgrade strongSwan packages"
-#   pacman:
-#     name="{{ item }}"
-#     state=latest
-#   with_items: strongswan_packages
+- name: Install strongSwan
+  pacman:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    "{{ strongswan_packages }}"
