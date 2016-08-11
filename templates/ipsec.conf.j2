@@ -5,7 +5,7 @@ config setup
   cachecrls={{ strongswan_cachecrls }}
 {% endif %}
 {% if strongswan_charondebug is defined %}
-  charondebug={{ strongswan_charondebug }}
+  charondebug="{{ strongswan_charondebug }}"
 {% endif %}
 {% if strongswan_charonstart is defined %}
   charonstart={{ strongswan_charonstart }}
