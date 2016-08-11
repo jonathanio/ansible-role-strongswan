@@ -1,28 +1,19 @@
 ---
 galaxy_info:
-  author: Jonathan Wright <github@jon.than.io>
-  description: Role to configure strongSwan IPSec service.
-  license: GPLv2
-  min_ansible_version: 1.6
+  author: Jonathan Wright <jon@than.io>
+  description: Role to configure strongSwan IPSec service
+  license: BSD
+  min_ansible_version: 2.1
   platforms:
   - name: Arch Linux
     versions:
     - all
-  # - name: RHEL
-  #   versions:
-  #   - 7
-  # - name: CentOS
-  #   versions:
-  #   - 7
-  # - name: Ubuntu
-  #   versions:
-  #   - trusty
-  #   - utopic
-  #   - vivid
-  # - name: Debian
-  #   versions:
-  #   - wheezy
-  categories:
-  - networking
-  - system
+  - name: EL
+    versions:
+      - 7
+  - name: Debian
+    versions:
+      - wheezy
+      - jessie
+
 dependencies: []
