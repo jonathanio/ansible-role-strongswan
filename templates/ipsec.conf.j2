@@ -17,4 +17,4 @@ config setup
   uniqueids={{ strongswan_uniqueids }}
 {% endif %}
 
-include /{{ strongswan_config_base }}/ipsec.conf.d/*.conf
+include {{ strongswan_config_base }}/ipsec.conf.d/*.conf

@@ -15,7 +15,7 @@
 - name: Configure strongSwan core settings
   template:
     src: "{{ item }}.j2"
-    dest: "/{{ strongswan_config_base }}/{{ item }}"
+    dest: "{{ strongswan_config_base }}/{{ item }}"
     owner: root
     group: root
     mode: 0640
@@ -28,7 +28,7 @@
 - name: Configure strongSwan default connection settings
   template:
     src: defaults.conf.j2
-    dest: "/{{ strongswan_config_base }}/ipsec.conf.d/00-defaults.conf"
+    dest: "{{ strongswan_config_base }}/ipsec.conf.d/00-defaults.conf"
     owner: root
     group: root
     mode: 0640
@@ -38,7 +38,7 @@
 - name: Configure strongSwan per-connection settings
   template:
     src: "connection.{{ item.1 }}.j2"
-    dest: "/{{ strongswan_config_base }}/ipsec.{{ item.1 }}.d/{{ item.0.priority | default(99) }}-{{ item.0.name }}.{{ item.1 }}"
+    dest: "{{ strongswan_config_base }}/ipsec.{{ item.1 }}.d/{{ item.0.priority | default(99) }}-{{ item.0.name }}.{{ item.1 }}"
     owner: root
     group: root
     mode: 0640
