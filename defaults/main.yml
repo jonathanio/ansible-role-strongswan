@@ -1,9 +1,6 @@
 ---
 # defaults file for strongswan
 
-strongswan_packages:
-  - strongswan
-
 strongswan_conn_default:
   auto: add
   type: tunnel
