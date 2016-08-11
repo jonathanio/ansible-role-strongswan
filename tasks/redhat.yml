@@ -1,0 +1,11 @@
+---
+# Redhat-specific tasks for strongswan
+
+- include_vars: redhat.yml
+
+- name: Install strongswan
+  yum:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+    "{{ strongswan_packages }}"
