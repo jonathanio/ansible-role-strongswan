@@ -17,10 +17,10 @@
 
 - name: Update apparmor profile for charon
   lineinfile:
-    path: /etc/apparmor.d/usr.lib.ipsec.charon
+    dest: /etc/apparmor.d/usr.lib.ipsec.charon
     line: "{{ item }}"
     state: present
-    insertbefore: }
+    insertbefore: "}"
   notify: restart apparmor
   with_items:
     - "  /etc/ipsec.secrets.d/     r,"

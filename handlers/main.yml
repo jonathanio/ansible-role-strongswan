@@ -5,3 +5,8 @@
   service:
     name=strongswan
     state=restarted
+
+- name: restart apparmor
+  service:
+    name=apparmor
+    state=restarted
