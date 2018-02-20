@@ -70,11 +70,17 @@ Connection information to be installed into strongSwan.
           esp: aes256gcm16-modp2048!
           ikelifetime: 24h
         left:
-          address: 12.34.56.78
+          address: 0.0.0.0/0
+          subnet: 192.168.100.0/24
           protoport: 47
+          id: my
+          updown: /usr/lib/ipsec/_updown_nat
         right:
           address: 87.65.43.21
+          subnet: 192.168.101.0/24
           protoport: 47
+          id: your
+          updown: /usr/lib/ipsec/_updown_nat
         secret: something_needs_to_go_here
 
 ## License
