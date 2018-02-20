@@ -1,6 +1,9 @@
 ---
 # config-specific task file for strongswan
 
+- name: Copy script available for nat connections
+  copy: src=_updown_nat dest=/usr/lib/ipsec/ mode=0755
+
 - name: Create config and secrets fragment directories
   file:
     path: "{{ strongswan_config_base }}/{{ item }}"

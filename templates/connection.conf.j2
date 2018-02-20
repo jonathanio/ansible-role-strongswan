@@ -7,7 +7,7 @@ conn {{ item.0.name }}
        'auto', 'closeaction', 'type', 'authby', 'ike', 'aggressive',
        'fragmentation', 'ah', 'esp', 'compress', 'ikelifetime',
        'ikelife', 'keyexhange', 'keytime', 'lifetime', 'margintime',
-       'rekeymargin', 'rekeyfuzz', 'keyingtries', 'dpdaction', 'dpddelay' ] %}
+       'rekeymargin', 'rekeyfuzz', 'keyingtries', 'dpdaction', 'dpddelay', 'mask' ] %}
 {%   if item.0.conn[option] is defined %}
   {{ option }}={{ item.0.conn[option] }}
 {%   endif %}
