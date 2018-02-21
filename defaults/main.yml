@@ -26,3 +26,5 @@ strongswan_conn: []
 #     address: remote_address
 #     # further right-hand options here
 #   secret: abcde...z
+
+mtu: 0
