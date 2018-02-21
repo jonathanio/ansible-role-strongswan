@@ -3,6 +3,16 @@
 
 - name: Copy script available for nat connections
   copy: src=_updown_nat dest=/usr/lib/ipsec/ mode=0755
+  notify:
+    restart strongswan
+
+- name: Configure kernel-netlink settings
+  template:
+    src: kernel-netlink.conf.j2
+    dest: /etc/strongswan.d/charon/kernel-netlink.conf
+    mode: 0750
+  notify:
+    restart strongswan
 
 - name: Create config and secrets fragment directories
   file:
