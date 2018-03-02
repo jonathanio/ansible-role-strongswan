@@ -1,6 +1,11 @@
 ---
 # handlers file for strongswan
 
+- name: restart apparmor
+  service:
+    name=apparmor
+    state=restarted
+
 - name: restart strongswan
   service:
     name=strongswan

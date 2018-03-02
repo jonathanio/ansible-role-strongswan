@@ -1,6 +1,14 @@
 ---
 # firewall-specific tasks for strongswan
 
+- name: Enable ip forward
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
+    sysctl_set: yes
+    state: present
+    reload: yes
+
 - name: Open firewalld protocols for strongSwan
   firewalld:
     rich_rule: "rule protocol value={{ item }} accept"
