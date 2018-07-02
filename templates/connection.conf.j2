@@ -6,7 +6,7 @@ conn {{ item.0.name }}
 {% for option in [
        'auto', 'closeaction', 'type', 'authby', 'ike', 'aggressive',
        'fragmentation', 'ah', 'esp', 'compress', 'ikelifetime',
-       'ikelife', 'keyexhange', 'keytime', 'lifetime', 'margintime',
+       'ikelife', 'keyexchange', 'keytime', 'lifetime', 'margintime',
        'rekeymargin', 'rekeyfuzz', 'keyingtries', 'dpdaction', 'dpddelay', 'mask',
        'reauth', 'rekey', 'dpdaction', 'dpdtimeout' ] %}
 {%   if item.0.conn[option] is defined %}
