@@ -1,6 +1,10 @@
 # {{ ansible_managed }}
 
+{% if item.0.conn['also'] is not defined %}
 # conn {{ item.0.name }} ({{ item.0.left.address }} <-> {{ item.0.right.address }})
+{% else %}
+# conn {{ item.0.name }}
+{% endif %}
 conn {{ item.0.name }}
   # Connection Settings
 {% for option in [
@@ -8,11 +12,12 @@ conn {{ item.0.name }}
        'fragmentation', 'ah', 'esp', 'compress', 'ikelifetime',
        'ikelife', 'keyexchange', 'keytime', 'lifetime', 'margintime',
        'rekeymargin', 'rekeyfuzz', 'keyingtries', 'dpdaction', 'dpddelay', 'mask',
-       'reauth', 'rekey', 'dpdaction', 'dpdtimeout' ] %}
+       'reauth', 'rekey', 'dpdaction', 'dpdtimeout','also', 'rightsubnet' ] %}
 {%   if item.0.conn[option] is defined %}
   {{ option }}={{ item.0.conn[option] }}
 {%   endif %}
 {% endfor %}
+{% if item.0.conn['also'] is not defined %}
   # Local Settings
   left={{ item.0.left.address }}
 {% for option in [
@@ -31,3 +36,4 @@ conn {{ item.0.name }}
   right{{ option }}={{ item.0.right[option] }}
 {%   endif %}
 {% endfor %}
+{% endif %}
