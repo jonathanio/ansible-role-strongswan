@@ -7,5 +7,23 @@
   apt:
     name: "{{ item }}"
     state: present
+    update_cache: 'True'
   with_items:
     "{{ strongswan_packages }}"
+
+- name: Check if charon apparmor profile exists
+  stat:
+    path: /etc/apparmor.d/usr.lib.ipsec.charon
+  register: charonstat
+
+- name: Update apparmor profile for charon
+  lineinfile:
+    dest: /etc/apparmor.d/usr.lib.ipsec.charon
+    line: "{{ item }}"
+    state: present
+    insertbefore: "}"
+  notify: restart apparmor
+  with_items:
+    - "  /etc/ipsec.secrets.d/     r,"
+    - "  /etc/ipsec.secrets.d/**   r,"
+  when: charonstat.stat.exists

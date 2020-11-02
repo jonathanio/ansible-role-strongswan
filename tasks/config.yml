@@ -1,6 +1,35 @@
 ---
 # config-specific task file for strongswan
 
+- name: Disable icmp redirects in all interfaces
+  sysctl:
+    name: net.ipv4.conf.all.send_redirects
+    value: 0
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+- name: Disable icmp redirects as a default configration
+  sysctl:
+    name: net.ipv4.conf.default.send_redirects
+    value: 0
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+- name: Copy script available for nat connections
+  copy: src=_updown_nat dest=/usr/lib/ipsec/ mode=0755
+  notify:
+    restart strongswan
+
+- name: Configure kernel-netlink settings
+  template:
+    src: kernel-netlink.conf.j2
+    dest: /etc/strongswan.d/charon/kernel-netlink.conf
+    mode: 0750
+  notify:
+    restart strongswan
+
 - name: Create config and secrets fragment directories
   file:
     path: "{{ strongswan_config_base }}/{{ item }}"
